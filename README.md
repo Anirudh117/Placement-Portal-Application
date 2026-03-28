@@ -172,6 +172,6 @@ This project is for educational and demonstration purposes.
 ## 👤 Author
 
 **Anirudhan M**
-Aspiring Data Scientist | Full-Stack Developer
+Aspiring Data Scientist | Software Enthusiast 
 
 ---
