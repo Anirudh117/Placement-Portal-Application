@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Companies</h2>
+<form class="row g-2" method="get">
+    <div class="col-auto">
+        <input type="text" name="search" placeholder="Search by name" value="{{ search }}" class="form-control">
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>ID</th><th>Name</th><th>Status</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for comp in companies %}
+        <tr>
+            <td>{{ comp.id }}</td>
+            <td>{{ comp.company_name }}</td>
+            <td>{{ comp.approval_status }}</td>
+            <td>
+                {% if comp.approval_status == 'Pending' %}
+                    <a class="btn btn-sm btn-success" href="?action=approve&id={{ comp.id }}">Approve</a>
+                    <a class="btn btn-sm btn-danger" href="?action=reject&id={{ comp.id }}">Reject</a>
+                {% endif %}
+                <a class="btn btn-sm btn-warning" href="?action=deactivate&id={{ comp.id }}">Deactivate</a>
+                <a class="btn btn-sm btn-dark" href="?action=blacklist&id={{ comp.id }}">Blacklist</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

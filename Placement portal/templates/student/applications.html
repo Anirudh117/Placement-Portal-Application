@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Complete Application History</h2>
+<table class="table">
+    <thead><tr><th>Drive</th><th>Company</th><th>Status</th><th>Applied On</th></tr></thead>
+    <tbody>
+    {% for app in applications %}
+        <tr>
+            <td>{{ app.drive.job_title if app.drive }}</td>
+            <td>{{ app.drive.company.company_name if app.drive and app.drive.company }}</td>
+            <td>{{ app.status }}</td>
+            <td>{{ app.applied_on }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Placement Drives</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr><th>ID</th><th>Company</th><th>Title</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    {% for drive in drives %}
+        <tr>
+            <td>{{ drive.id }}</td>
+            <td>{{ drive.company.company_name if drive.company }}</td>
+            <td>{{ drive.job_title }}</td>
+            <td>{{ drive.status }}</td>
+            <td>
+                {% if drive.status == 'Pending' %}
+                    <a class="btn btn-sm btn-success" href="?action=approve&id={{ drive.id }}">Approve</a>
+                    <a class="btn btn-sm btn-danger" href="?action=reject&id={{ drive.id }}">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

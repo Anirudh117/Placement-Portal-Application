@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Applications</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr><th>ID</th><th>Student</th><th>Email</th><th>Company</th><th>Drive</th><th>Applied On</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+    {% for app in applications %}
+        <tr>
+            <td>{{ app.id }}</td>
+            <td>{{ app.student.user.name if app.student else '' }}</td>
+            <td>{{ app.student.user.email if app.student else '' }}</td>
+            <td>{{ app.drive.company.company_name if app.drive and app.drive.company else '' }}</td>
+            <td>{{ app.drive.job_title if app.drive else '' }}</td>
+            <td>{{ app.applied_on }}</td>
+            <td>{{ app.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

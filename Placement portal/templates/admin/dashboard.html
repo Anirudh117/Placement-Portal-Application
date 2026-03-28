@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="row">
+    <div class="col-md-3"><div class="card text-white bg-primary mb-3"><div class="card-body"><h5 class="card-title">Students</h5><p class="card-text">{{ students_count }}</p></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-success mb-3"><div class="card-body"><h5 class="card-title">Companies</h5><p class="card-text">{{ companies_count }}</p></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-warning mb-3"><div class="card-body"><h5 class="card-title">Drives</h5><p class="card-text">{{ drives_count }}</p></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-info mb-3"><div class="card-body"><h5 class="card-title">Applications</h5><p class="card-text">{{ applications_count }}</p></div></div></div>
+</div>
+<hr>
+<p>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin_students') }}">Manage Students</a>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin_companies') }}">Manage Companies</a>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin_drives') }}">Manage Drives</a>
+    <a class="btn btn-outline-primary" href="{{ url_for('admin_applications') }}">View Applications</a>
+</p>
+{% endblock %}

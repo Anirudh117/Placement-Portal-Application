@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Student Dashboard</h2>
+<p>Welcome, {{ current_user.name }}</p>
+<p><a class="btn btn-info mb-3" href="{{ url_for('student_applications') }}">View Past Placement History</a></p>
+<h3>Available Drives from approved companies (pending approval or live)</h3>
+<table class="table">
+    <thead><tr><th>Title</th><th>Company</th><th>Deadline</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for drive in drives %}
+        <tr>
+            <td>{{ drive.job_title }}</td>
+            <td>{{ drive.company.company_name if drive.company }}</td>
+            <td>{{ drive.deadline }}</td>
+            <td>{{ drive.status }}</td>
+            <td>
+                {% if drive.status == 'Approved' %}
+                    {% if drive.id not in applied %}
+                        <a href="{{ url_for('student_apply', did=drive.id) }}" class="btn btn-sm btn-success">Apply</a>
+                    {% else %}
+                        Applied
+                    {% endif %}
+                {% else %}
+                    {{ drive.status }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h3>Your Applications</h3>
+<table class="table">
+    <thead><tr><th>Drive</th><th>Status</th></tr></thead>
+    <tbody>
+    {% for a in apps %}
+        <tr>
+            <td>{{ a.drive.job_title if a.drive }}</td>
+            <td>{{ a.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p><a class="btn btn-primary" href="{{ url_for('student_profile') }}">Edit Profile</a></p>
+{% endblock %}

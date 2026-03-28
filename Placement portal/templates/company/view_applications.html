@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Applications for {{ drive.job_title }}</h2>
+<table class="table mt-3">
+    <thead><tr><th>ID</th><th>Student</th><th>Applied On</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for app in applications %}
+        <tr>
+            <td>{{ app.id }}</td>
+            <td>{{ app.student.user.name if app.student else '' }}</td>
+            <td>{{ app.applied_on }}</td>
+            <td>{{ app.status }}</td>
+            <td>
+                <form method="POST" class="d-inline">
+                    <input type="hidden" name="app_id" value="{{ app.id }}">
+                    <select name="status" class="form-select form-select-sm d-inline w-auto">
+                        <option value="Shortlisted" {% if app.status=='Shortlisted' %}selected{% endif %}>Shortlist</option>
+                        <option value="Selected" {% if app.status=='Selected' %}selected{% endif %}>Select</option>
+                        <option value="Rejected" {% if app.status=='Rejected' %}selected{% endif %}>Reject</option>
+                    </select>
+                    <button class="btn btn-sm btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

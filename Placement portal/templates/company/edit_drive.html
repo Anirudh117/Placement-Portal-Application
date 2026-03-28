@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Drive</h2>
+<form method="POST">
+    <div class="mb-3">
+        <input type="text" name="job_title" placeholder="Job Title" value="{{ drive.job_title }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <textarea name="job_description" placeholder="Description" class="form-control" required>{{ drive.job_description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <input type="text" name="eligibility" placeholder="Eligibility" value="{{ drive.eligibility }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <input type="date" name="deadline" value="{{ drive.deadline }}" class="form-control">
+    </div>
+    <button class="btn btn-success">Save</button>
+</form>
+{% endblock %}

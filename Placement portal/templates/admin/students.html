@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Students</h2>
+<form class="row g-2" method="get">
+    <div class="col-auto">
+        <input type="text" name="search" placeholder="Name, ID or contact" value="{{ search }}" class="form-control">
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+<table class="table table-hover mt-3">
+    <thead><tr><th>ID</th><th>Name</th><th>Contact</th><th>Active</th><th>Blacklisted</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for stud in students %}
+        <tr>
+            <td>{{ stud.user.id }}</td>
+            <td>{{ stud.user.name }}</td>
+            <td>{{ stud.contact }}</td>
+            <td>{{ stud.user.active }}</td>
+            <td>{{ stud.user.blacklisted }}</td>
+            <td>
+                <a class="btn btn-sm btn-warning" href="?action=deactivate&id={{ stud.id }}">Deactivate</a>
+                <a class="btn btn-sm btn-dark" href="?action=blacklist&id={{ stud.id }}">Blacklist</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

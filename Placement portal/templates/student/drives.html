@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Available Drives</h2>
+<table class="table">
+    <thead><tr><th>Title</th><th>Company</th><th>Deadline</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for drive in drives %}
+        <tr>
+            <td>{{ drive.job_title }}</td>
+            <td>{{ drive.company.company_name if drive.company }}</td>
+            <td>{{ drive.deadline }}</td>
+            <td>{{ drive.status }}</td>
+            <td>
+                {% if drive.status == 'Approved' %}
+                    {% if drive.id in applied %}
+                        Applied
+                    {% else %}
+                        <a href="{{ url_for('student_apply', did=drive.id) }}" class="btn btn-sm btn-success">Apply</a>
+                    {% endif %}
+                {% else %}
+                    {{ drive.status }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
